@@ -1,0 +1,24 @@
+{
+  "name": "r019h-websocket",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nosikov-studio/r019h-websocket.git"
+  },
+  "author": "Nosikov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Nosikov-studio/r019h-websocket/issues"
+  },
+  "homepage": "https://github.com/Nosikov-studio/r019h-websocket#readme",
+  "dependencies": {
+    "express": "^5.1.0",
+    "ws": "^8.18.2"
+  }
+}
