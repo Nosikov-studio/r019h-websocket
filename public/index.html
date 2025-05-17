@@ -6,7 +6,7 @@
     <title>WebSocket Client</title>
     <script>
         document.addEventListener('DOMContentLoaded', (event) => {
-            const ws =new WebSocket('ws://localhost:8888');
+            const ws =new WebSocket('ws://85.28.47.165:8888');
             ws.onopen = () => {
                 console.log('Connected to the WebSocket server');
                 ws.send(JSON.stringify({event: 'greeting', message: 'Hello Server!'}));
