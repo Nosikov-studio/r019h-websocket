@@ -15,14 +15,14 @@ wss.on('connection', (ws) => {
     console.log("New client connected");
 
     ws.on('message', (message) => {
-        server.clients.forEach(client => {
-            if (client.readyState === WebSocket.OPEN){
-                client.send(message);
-            }
-        });
+        // server.clients.forEach(client => {
+        //     if (client.readyState === WebSocket.OPEN){
+        //         client.send(message);
+        //     }
+        // });
         
-        //console.log('received: %s', message);
-        //ws.send(`${message}`);
+        console.log('received: %s', message);
+        ws.send(`${message}`);
     });
 
     ws.on('close', () => {
