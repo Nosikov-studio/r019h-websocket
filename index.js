@@ -1,7 +1,7 @@
 import express from 'express';
 import http from 'http';
-import { WebSocketServer } from 'ws';
-
+//import { WebSocketServer } from 'ws';
+import { WebSocketServer, WebSocket } from 'ws';
 const app =express();
 const port =8888;
 
@@ -17,7 +17,7 @@ wss.on('connection', (ws) => {
     ws.on('message', (message) => {
         const data =JSON.parse(message);
         wss.clients.forEach(client => {
-            if (client.readyState === WebSocketServer.OPEN){
+            if (client.readyState === WebSocket.OPEN){
                 client.send(JSON.stringify(data));
             }
         });
