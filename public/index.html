@@ -1,27 +1,49 @@
 <!DOCTYPE html>
-<html lang="ru">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="minimum-scale=1.0, width=device-width, maximum-scale=1.0, user-scalable=no">
-        <title>WebSocket</title>
-        <link rel="stylesheet" href="app.css">
-    </head>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebSocket Client</title>
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const ws =new WebSocket('ws://85.28.47.165:8888');
+            // const ws =new WebSocket('ws://localhost:8888');
+            ws.onopen = () => {
+                console.log('Connected to the WebSocket server');
+                ws.send(JSON.stringify({event: 'greeting', message: 'Hello Server!'}));
+            };
 
-    <body>
-        <header>
-            <h1>+WebSocket+</h1>
-            <span id="status">OFFLINE</span>
-        </header>
+            ws.onmessage = (event) => {
+                try {
+                    console.log("Event ->", event)
+                    const data = JSON.parse(event.data);
+                    const md=document.getElementById('messages');
+                    const me=document.createElement('div');
+                    me.textContent =`${data.event}: ${data.message}`;
+                    md.appendChild(me);
+                } catch (error) { console.log("Error" + error)}
+            };
+            ws.onclose = () => {
+                console.log('Disconnected from the Websocket server');
+            };
+            ws.onerror =(error) => {
+                console.error('Websocket error:', error);
+            };
 
-        <main>
-            <ul id="messages"></ul>
+            document.getElementById('sendButton').addEventListener('click', ()=> {
+                const messageInput =document.getElementById('messageInput').value;
+                ws.send(JSON.stringify({ event: 'greeting', message: messageInput}));
+            });
+        });
 
-            <form id="form">
-                <label for="message">&gt;</label>
-                <input type="text" id="input" required autofocus autocomplete="off">
-            </form>
-        </main>
-
-        <script src="app.js"></script>
-    </body>
+    </script>
+</head>
+<body>
+    <h1> WebSocket Client</h1>
+    <div> 
+        <input type="text" id="messageInput" placeholder="Type a message">
+        <button id="sendButton"> Send</button>
+    </div>
+    <div id="messages"></div>
+</body>
 </html>
